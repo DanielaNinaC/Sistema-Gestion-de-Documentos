@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+body {
+    font-family: Arial, sans-serif;
+
+}
+
+.login-box {
+    background: white;
+    padding: 20px;
+}

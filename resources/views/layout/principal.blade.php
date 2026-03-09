@@ -5,9 +5,9 @@
     <title>@yield('title')</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-100 h-screen overflow-hidden flex flex-col">
 
-    <div class="bg-white shadow p-3 flex justify-between items-center">
+    <div class="bg-white shadow p-3 flex justify-between items-center shrink-0">
         <img src="{{ asset('imagenes/logoFranco.jpg') }}" alt="Logo" class="h-12 w-30">
         <h1 class="text-xl font-bold">Sistema SGDP</h1>
 
@@ -19,18 +19,18 @@
         </form>
     </div>
 
-    <div class="flex">
-        <aside class="w-64 bg-gray-800 text-white min-h-screen p-4 space-y-2">
-            <a href="/dashboard" class="block p-2 hover:bg-gray-700 rounded">Dashboard</a>
-            <a href="/registrarUsuarios" class="block p-2 hover:bg-gray-700 rounded">Registrar Usuarios</a>
-            <a href="/registrar" class="block p-2 hover:bg-gray-700 rounded">Registrar Empleados</a>
-            <a href="/registrar" class="block p-2 hover:bg-gray-700 rounded">Registrar Documentos</a>
-            <a href="/documentos" class="block p-2 hover:bg-gray-700 rounded">Documentos</a>
-            <a href="/tipoDocumentos" class="block p-2 hover:bg-gray-700 rounded">Tipo de Documentos</a>
+    <div class="flex flex-1 min-h-0">
+        <aside class="w-64 bg-gray-800 text-white p-4 space-y-2 overflow-y-auto">
+            <a href="{{ route('dashboard') }}" class="block p-2 hover:bg-gray-700 rounded">Dashboard</a>
+            <a href="{{ route('usuarios.index') }}" class="block p-2 hover:bg-gray-700 rounded">Registrar Usuarios</a>
+            <a href="{{ route('empleados.index') }}" class="block p-2 hover:bg-gray-700 rounded">Registrar Empleados</a>
+            <a href="{{ route('registros.create') }}" class="block p-2 hover:bg-gray-700 rounded">Registrar Documentos</a>
+            <a href="{{ route('documentos.index') }}" class="block p-2 hover:bg-gray-700 rounded">Documentos</a>
+            <a href="{{ route('tipos-documentos.index') }}" class="block p-2 hover:bg-gray-700 rounded">Tipo de Documentos</a>
         </aside>
 
         {{-- Contenido dinámico --}}
-        <main class="flex-1 p-8">
+        <main class="flex-1 p-8 overflow-y-auto">
             @yield('content')
         </main>
     </div>

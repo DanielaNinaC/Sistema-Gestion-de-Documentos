@@ -9,8 +9,18 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $registros = Registro::all();
-        return view('dashboard', compact('registros'));
+        $totalDocumentos = Registro::count();
+        $totalEmpleados = Registro::distinct('empleado')->count('empleado');
+        $totalTipos = Registro::distinct('archivo_tipo')->count('archivo_tipo');
+
+        $ultimosRegistros = Registro::latest()->take(5)->get();
+
+        return view('dashboard', compact(
+            'totalDocumentos',
+            'totalEmpleados',
+            'totalTipos',
+            'ultimosRegistros'
+        ));
     }
 }
 

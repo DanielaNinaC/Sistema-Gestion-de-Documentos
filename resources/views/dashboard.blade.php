@@ -30,14 +30,14 @@
 <div class="bg-white shadow rounded p-5 mt-8">
     <h3 class="text-xl font-semibold mb-4">Acciones rápidas</h3>
     <div class="flex flex-wrap gap-3">
-        <a href="{{ route('registros.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded">Registrar documento</a>
+        <a href="{{ route('documentos.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded">Registrar documento</a>
         <a href="{{ route('documentos.index') }}" class="bg-gray-700 text-white px-4 py-2 rounded">Ver documentos</a>
         <a href="{{ route('tipos-documentos.index') }}" class="bg-green-700 text-white px-4 py-2 rounded">Ver tipos</a>
     </div>
 </div>
 
 <div class="bg-white shadow rounded p-5 mt-8">
-    <h3 class="text-xl font-semibold mb-4">Ultimos registros</h3>
+    <h3 class="text-xl font-semibold mb-4">Últimos documentos</h3>
     <table class="w-full">
         <thead class="bg-gray-100">
             <tr>
@@ -48,7 +48,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($ultimosRegistros as $registro)
+            @forelse($ultimosDocumentos as $registro)
                 <tr class="border-b">
                     <td class="p-2">{{ $registro->codigo }}</td>
                     <td class="p-2">{{ $registro->empleado }}</td>
@@ -57,7 +57,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td class="p-2" colspan="4">No hay registros todavia.</td>
+                    <td class="p-2" colspan="4">No hay documentos todavía.</td>
                 </tr>
             @endforelse
         </tbody>
@@ -65,3 +65,4 @@
 </div>
 
 @endsection
+

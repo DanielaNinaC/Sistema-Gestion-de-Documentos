@@ -15,4 +15,9 @@ class Registro extends Model
     'ruta_archivo'
 ];
 
+    /**
+     * Use the `documentos` table instead of the default `registros`.
+     */
+    protected $table = 'documentos';
+
 }

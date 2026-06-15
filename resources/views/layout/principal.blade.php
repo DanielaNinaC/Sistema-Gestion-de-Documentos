@@ -22,9 +22,11 @@
     <div class="flex flex-1 min-h-0">
         <aside class="w-64 bg-gray-800 text-white p-4 space-y-2 overflow-y-auto">
             <a href="{{ route('dashboard') }}" class="block p-2 hover:bg-gray-700 rounded">Dashboard</a>
-            <a href="{{ route('usuarios.index') }}" class="block p-2 hover:bg-gray-700 rounded">Registrar Usuarios</a>
+            @if(auth()->user()->isAdmin())
+                 <a href="{{ route('usuarios.index') }}" class="block p-2 hover:bg-gray-700 rounded">Registrar Usuarios</a>
+            @endif
             <a href="{{ route('empleados.index') }}" class="block p-2 hover:bg-gray-700 rounded">Registrar Empleados</a>
-            <a href="{{ route('registros.create') }}" class="block p-2 hover:bg-gray-700 rounded">Registrar Documentos</a>
+              <a href="{{ route('documentos.create') }}" class="block p-2 hover:bg-gray-700 rounded">Registrar Documentos</a>
             <a href="{{ route('documentos.index') }}" class="block p-2 hover:bg-gray-700 rounded">Documentos</a>
             <a href="{{ route('tipos-documentos.index') }}" class="block p-2 hover:bg-gray-700 rounded">Tipo de Documentos</a>
         </aside>
@@ -37,3 +39,4 @@
 
 </body>
 </html>
+

@@ -26,20 +26,20 @@
     </div>
 @endif
 
-<form method="POST" action="{{ route('empleados.store') }}" class="bg-white p-6 rounded shadow space-y-4 mt-6">
+<form method="POST" action="{{ route('empleados.store') }}" class="bg-white p-6 rounded-xl shadow space-y-4 mt-6">
     @csrf
 
     <div>
         <label class="block font-semibold">Codigo de Empleado</label>
-        <input type="text" name="codigo" value="{{ old('codigo') }}" class="w-full border p-2 rounded" required>
+        <input type="text" name="codigo" value="{{ old('codigo') }}" class="w-full border p-2 rounded-xl" required>
     </div>
 
     <div>
         <label class="block font-semibold">Nombre del Empleado</label>
-        <input type="text" name="nombre" value="{{ old('nombre') }}" class="w-full border p-2 rounded" required>
+        <input type="text" name="nombre" value="{{ old('nombre') }}" class="w-full border p-2 rounded-xl" required>
     </div>
 
-    <button class="bg-blue-600 text-white px-4 py-2 rounded">
+    <button class="bg-blue-600 text-white px-4 py-2 rounded-xl">
         Guardar Empleado
     </button>
 </form>
@@ -62,9 +62,21 @@
                 <td class="p-2">{{ $empleado->nombre }}</td>
                 <td class="p-2">{{ $empleado->created_at->format('d/m/Y H:i') }}</td>
                 <td class="p-2">
-                    <a href="{{ route('empleados.documentos', $empleado->codigo) }}" class="text-blue-600 underline">
-                        Ver mas
-                    </a>
+                    <div class="flex gap-2 text-sm">
+                        <a href="{{ route('empleados.documentos', $empleado->codigo) }}" class="text-blue-600 underline">
+                            Ver documentos
+                        </a>
+                        @if(auth()->user()->isAdmin())
+                            <a href="{{ route('empleados.edit', $empleado) }}" class="text-yellow-600 underline">
+                                Editar
+                            </a>
+                            <form method="POST" action="{{ route('empleados.destroy', $empleado) }}" class="inline" onsubmit="return confirm('¿Eliminar empleado?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 underline">Eliminar</button>
+                            </form>
+                        @endif
+                    </div>
                 </td>
             </tr>
         @empty
@@ -74,5 +86,9 @@
         @endforelse
     </tbody>
 </table>
+
+<div class="mt-4">
+    {{ $empleados->links() }}
+</div>
 
 @endsection

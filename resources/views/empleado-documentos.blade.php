@@ -23,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-        @forelse($registros as $registro)
+        @forelse($documentos as $registro)
             <tr class="border-b">
                 <td class="p-2">{{ $registro->archivo_nombre }}</td>
                 <td class="p-2">{{ $registro->archivo_tipo }}</td>
@@ -43,3 +43,5 @@
 </table>
 
 @endsection
+
+  

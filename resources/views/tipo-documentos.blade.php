@@ -26,7 +26,7 @@
     </div>
 @endif
 
-<form action="{{ route('tipos-documentos.store') }}" method="POST" class="bg-white p-6 rounded shadow mb-8">
+<form action="{{ route('tipos-documentos.store') }}" method="POST" class="bg-white p-6 rounded-xl shadow mb-8">
     @csrf
 
     <div class="flex flex-col md:flex-row md:items-end gap-4">
@@ -36,12 +36,12 @@
                 type="text"
                 name="nombre"
                 value="{{ old('nombre') }}"
-                class="w-full border p-2 rounded"
+                class="w-full border p-2 rounded-xl"
                 placeholder="Ej: Contrato, Memorandum, Informe"
                 required
             >
         </div>
-        <button class="bg-blue-600 text-white px-4 py-2 rounded h-10">
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-xl h-10">
             Registrar Tipo
         </button>
     </div>
@@ -54,6 +54,9 @@
         <tr>
             <th class="p-2 text-left">Tipo de Documento</th>
             <th class="p-2 text-left">Cantidad</th>
+            @if(auth()->user()->isAdmin())
+                <th class="p-2 text-left">Acciones</th>
+            @endif
         </tr>
     </thead>
     <tbody>
@@ -61,10 +64,24 @@
             <tr class="border-b">
                 <td class="p-2">{{ $tipo->nombre }}</td>
                 <td class="p-2">{{ $tipo->total }}</td>
+                @if(auth()->user()->isAdmin())
+                    <td class="p-2">
+                        <div class="flex gap-2 text-sm">
+                            <a href="{{ route('tipos-documentos.edit', $tipo) }}" class="text-yellow-600 underline">
+                                Editar
+                            </a>
+                            <form method="POST" action="{{ route('tipos-documentos.destroy', $tipo) }}" class="inline" onsubmit="return confirm('¿Eliminar tipo de documento?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 underline">Eliminar</button>
+                            </form>
+                        </div>
+                    </td>
+                @endif
             </tr>
         @empty
             <tr>
-                <td class="p-2" colspan="2">No hay tipos registrados.</td>
+                <td class="p-2" colspan="3">No hay tipos registrados.</td>
             </tr>
         @endforelse
     </tbody>

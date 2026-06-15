@@ -17,8 +17,14 @@ class AuthController extends Controller
     public function login(Request $request)
 {
     $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
+        'email' => 'required|email:rfc|max:255',
+        'password' => 'required|max:255',
+    ], [
+        'email.required' => 'El correo es requerido.',
+        'email.email' => 'El correo debe ser un email válido.',
+        'email.max' => 'El correo es demasiado largo.',
+        'password.required' => 'La contraseña es requerida.',
+        'password.max' => 'La contraseña es demasiado larga.',
     ]);
 
     $credentials = $request->only('email', 'password');
@@ -31,10 +37,9 @@ class AuthController extends Controller
     }
 
     return back()->withErrors([
-        'email' => 'Credenciales incorrectas',
-    ]);
+        'email' => 'Las credenciales ingresadas no coinciden con nuestros registros.',
+    ])->onlyInput('email');
 }
-
 
     public function logout(Request $request)
 {
@@ -46,5 +51,4 @@ class AuthController extends Controller
     return redirect('/login');
 }
 
-    
 }

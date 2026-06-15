@@ -11,4 +11,9 @@ class TipoDocumento extends Model
     protected $fillable = [
         'nombre',
     ];
+
+    public function documentos()
+    {
+        return $this->hasMany(Registro::class, 'archivo_tipo', 'nombre');
+    }
 }
